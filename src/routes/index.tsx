@@ -1,6 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import retrato from "@/assets/retrato.jpg";
+import retratoAsset from "@/assets/julia-retrato.jpg.asset.json";
+
+const retrato = retratoAsset.url;
 import videoPoster from "@/assets/video-poster.jpg";
 import { Reveal } from "@/components/Reveal";
 import { Logo, LogoLockup } from "@/components/Logo";
@@ -100,9 +102,15 @@ function Index() {
   return (
     <div className="min-h-screen bg-paper text-ink font-body antialiased selection:bg-accent/15">
       <header className="fixed inset-x-0 top-0 z-50 border-b border-line bg-paper/80 backdrop-blur-md">
-        <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
-          <a href="#topo" className="transition-opacity hover:opacity-80">
-            <LogoLockup size={34} />
+        <div className="mx-auto grid h-16 max-w-6xl grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-4 sm:px-6">
+          <a href="#topo" className="min-w-0 transition-opacity hover:opacity-80">
+            <LogoLockup size={32} />
+          </a>
+          <a
+            href="#contato"
+            className="shrink-0 rounded-full bg-ink px-4 py-2 font-mono text-[10px] uppercase tracking-[0.16em] text-paper transition-colors hover:bg-accent md:hidden"
+          >
+            Contato
           </a>
           <nav className="hidden items-center gap-6 font-mono text-[10px] uppercase tracking-[0.16em] text-soft md:flex">
             {[
@@ -131,7 +139,7 @@ function Index() {
         </div>
       </header>
 
-      <main id="topo" className="mx-auto max-w-6xl px-6 pt-28 pb-20">
+      <main id="topo" className="mx-auto max-w-6xl px-4 pt-24 pb-16 sm:px-6 sm:pt-28 sm:pb-20">
         {/* Hero */}
         <section className="grid items-end gap-8 md:grid-cols-12">
           <Reveal className="md:col-span-8">
@@ -198,7 +206,7 @@ function Index() {
         </section>
 
         {/* Marquee */}
-        <Reveal className="mt-16 overflow-hidden border-y border-line py-3">
+        <Reveal className="mt-14 -mx-4 overflow-hidden border-y border-line py-3 sm:mx-0 sm:mt-16">
           <div className="marquee flex w-max gap-10 font-mono text-[11px] uppercase tracking-[0.2em] text-soft">
             {Array.from({ length: 2 }).map((_, r) => (
               <div key={r} className="flex gap-10">
@@ -224,7 +232,7 @@ function Index() {
         </Reveal>
 
         {/* Perfil */}
-        <Reveal as="section" id="perfil" className="mt-24 grid gap-8 md:grid-cols-12">
+        <Reveal as="section" id="perfil" className="mt-16 grid gap-6 sm:gap-8 md:mt-24 md:grid-cols-12">
           <div className="md:col-span-4">
             <h2 className="font-display text-3xl font-semibold tracking-tight">Perfil</h2>
             <p className="mt-2 font-mono text-[11px] uppercase tracking-[0.14em] text-soft">Quem sou</p>
@@ -244,7 +252,7 @@ function Index() {
         </Reveal>
 
         {/* Vídeo */}
-        <Reveal as="section" id="video" className="mt-20 -mx-6">
+        <Reveal as="section" id="video" className="mt-16 -mx-4 sm:mt-20 sm:-mx-6">
           <div className="group relative aspect-video w-full overflow-hidden bg-[#141311]">
             {tocandoVideo ? (
               <video
@@ -273,11 +281,13 @@ function Index() {
                     <span className="ml-1 block h-0 w-0 border-y-[11px] border-l-[18px] border-y-transparent border-l-paper" />
                   </button>
                 </div>
-                <div className="absolute bottom-6 left-6 text-paper">
+                <div className="absolute bottom-4 left-4 text-paper sm:bottom-6 sm:left-6">
                   <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-paper/60">
                     01 &nbsp;·&nbsp; Apresentação
                   </p>
-                  <p className="mt-1 font-display text-2xl font-medium italic">Conheça meu trabalho</p>
+                  <p className="mt-1 font-display text-lg font-medium italic sm:text-2xl">
+                    Conheça meu trabalho
+                  </p>
                 </div>
               </>
             )}
@@ -285,17 +295,18 @@ function Index() {
         </Reveal>
 
         {/* Experiência — linha do tempo interativa */}
-        <section id="experiencia" className="mt-24">
-          <Reveal className="flex items-end justify-between border-b border-ink pb-3">
-            <h2 className="font-display text-3xl font-semibold tracking-tight">Experiência</h2>
-            <span className="font-mono text-[11px] uppercase tracking-[0.14em] text-soft">
-              passe o mouse pelos anos
+        <section id="experiencia" className="mt-16 md:mt-24">
+          <Reveal className="flex flex-wrap items-end justify-between gap-2 border-b border-ink pb-3">
+            <h2 className="font-display text-2xl font-semibold tracking-tight sm:text-3xl">Experiência</h2>
+            <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-soft sm:text-[11px]">
+              toque ou passe o mouse pelos anos
             </span>
           </Reveal>
 
-          <Reveal delay={80} className="mt-12">
+          <Reveal delay={80} className="mt-10 sm:mt-12">
             {/* Trilho */}
-            <div className="relative">
+            <div className="-mx-4 overflow-x-auto px-4 pb-2 sm:mx-0 sm:px-0">
+            <div className="relative min-w-[460px]">
               <div className="absolute inset-x-0 top-[13px] h-px bg-line" />
               <div
                 className="absolute top-[13px] h-px bg-accent transition-all duration-500 ease-[cubic-bezier(0.22,0.8,0.2,1)]"
@@ -336,7 +347,7 @@ function Index() {
                           {e.ano}
                         </span>
                         <span
-                          className={`mt-1 hidden font-mono text-[9px] uppercase tracking-[0.14em] transition-opacity duration-300 sm:block ${
+                          className={`mt-1 block font-mono text-[9px] uppercase tracking-[0.14em] transition-opacity duration-300 ${
                             atual ? "text-ink opacity-100" : "text-soft opacity-50"
                           }`}
                         >
@@ -348,15 +359,16 @@ function Index() {
                 })}
               </ol>
             </div>
+            </div>
 
             {/* Painel */}
             <div
               key={exp.empresa}
-              className="reveal mt-12 grid gap-6 border-t border-line pt-8 md:grid-cols-12"
+              className="reveal mt-10 grid gap-6 border-t border-line pt-8 sm:mt-12 md:grid-cols-12"
             >
               <div className="md:col-span-4">
                 <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-accent">{exp.periodo}</p>
-                <h3 className="mt-2 font-display text-3xl font-semibold leading-tight tracking-tight">
+                <h3 className="mt-2 font-display text-2xl font-semibold leading-tight tracking-tight sm:text-3xl">
                   {exp.empresa}
                 </h3>
                 <p className="mt-2 text-[13px] text-soft">{exp.cargo}</p>
@@ -434,7 +446,7 @@ function Index() {
           <div className="grid gap-10 md:grid-cols-12">
             <div className="md:col-span-4">
               <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-accent">Idiomas</p>
-              <h2 className="mt-3 font-display text-4xl font-semibold leading-tight tracking-tight">
+              <h2 className="mt-3 font-display text-3xl font-semibold leading-tight tracking-tight sm:text-4xl">
                 Comunicação sem <span className="italic">fronteiras</span>
               </h2>
               <p className="mt-4 max-w-[38ch] text-[14px] leading-relaxed text-paper/70">
@@ -442,17 +454,19 @@ function Index() {
                 documentação técnica e conteúdo em inglês com naturalidade.
               </p>
             </div>
-            <div className="space-y-7 md:col-span-8 md:pt-2">
+            <div className="space-y-6 md:col-span-8 md:space-y-7 md:pt-2">
               {idiomas.map((l, i) => (
                 <div key={l.nome} className="group">
-                  <div className="flex items-baseline justify-between">
-                    <p className="font-display text-2xl font-semibold tracking-tight">
+                  <div className="flex flex-wrap items-baseline justify-between gap-x-3">
+                    <p className="font-display text-xl font-semibold tracking-tight sm:text-2xl">
                       <span className="mr-3 font-mono text-[11px] uppercase tracking-[0.2em] text-accent">
                         {l.tag}
                       </span>
                       {l.nome}
                     </p>
-                    <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-paper/60">{l.nivel}</p>
+                    <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-paper/60 sm:text-[11px]">
+                      {l.nivel}
+                    </p>
                   </div>
                   <div className="mt-3 h-[3px] w-full overflow-hidden bg-paper/15">
                     <div
@@ -549,20 +563,20 @@ function Index() {
         </section>
 
         {/* Contato */}
-        <Reveal as="footer" id="contato" className="mt-24 border-t border-ink pt-10">
+        <Reveal as="footer" id="contato" className="mt-16 border-t border-ink pt-10 md:mt-24">
           <div className="grid items-end gap-8 md:grid-cols-12">
             <div className="md:col-span-7">
               <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-accent">Próximo passo</p>
-              <h2 className="mt-3 text-balance font-display text-[clamp(1.8rem,4.2vw,3rem)] font-semibold leading-[1.04] tracking-tight">
+              <h2 className="mt-3 text-balance font-display text-[clamp(1.6rem,4.2vw,3rem)] font-semibold leading-[1.04] tracking-tight">
                 Vamos construir algo <span className="font-medium italic">juntos</span>.
               </h2>
             </div>
             <div className="md:col-span-5">
               <a
                 href="mailto:julalvesgarcia@gmail.com"
-                className="group inline-flex items-center gap-3 rounded-full border border-ink px-6 py-3 text-[15px] font-medium transition-all duration-300 hover:bg-ink hover:text-paper"
+                className="group inline-flex max-w-full items-center gap-3 rounded-full border border-ink px-5 py-3 text-[13px] font-medium transition-all duration-300 hover:bg-ink hover:text-paper sm:px-6 sm:text-[15px]"
               >
-                julalvesgarcia@gmail.com
+                <span className="truncate">julalvesgarcia@gmail.com</span>
                 <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
               </a>
             </div>
