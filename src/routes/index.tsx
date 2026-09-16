@@ -2,6 +2,8 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import retrato from "@/assets/retrato.jpg";
 import videoPoster from "@/assets/video-poster.jpg";
+import { Reveal } from "@/components/Reveal";
+import { Logo, LogoLockup } from "@/components/Logo";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -21,6 +23,8 @@ export const Route = createFileRoute("/")({
         content:
           "Mais de 4 anos conduzindo ciclos completos de desenvolvimento web, do briefing à entrega.",
       },
+      { property: "og:type", content: "profile" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Index,
@@ -28,13 +32,49 @@ export const Route = createFileRoute("/")({
 
 const experiencias = [
   {
-    ano: "2023—",
-    nota: "Atual",
+    ano: "2021",
+    periodo: "Jul – Out 2021",
+    empresa: "Salum Construções",
+    cargo: "Jovem Aprendiz — Eletroeletrônica",
+    local: "Belo Horizonte",
+    itens: ["Sistemas eletrônicos, circuitos e manutenção básica."],
+  },
+  {
+    ano: "2022",
+    periodo: "Out/2021 – Jul/2022",
+    empresa: "Anelo Digital",
+    cargo: "Desenvolvedora Web + Marketing Digital",
+    local: "Belo Horizonte",
+    itens: [
+      "Criação e manutenção de sites WordPress e aplicações JavaScript.",
+      "Desenvolvimento e otimização de e-commerces (Shopify, Nuvemshop, Tray).",
+      "Campanhas de tráfego pago: Google Ads e Meta Ads.",
+      "Google Tag Manager, Analytics e estratégias de marketing digital.",
+      "Gestão da infraestrutura de hospedagem e servidores.",
+    ],
+  },
+  {
+    ano: "2023",
+    periodo: "Jul/2022 – Fev/2023",
+    empresa: "EduCAT Tecnologia",
+    cargo: "Desenvolvedora Front-End",
+    local: "Belo Horizonte",
+    itens: [
+      'Plataforma "Diploma Digital" com React (front-end) e Django (back-end) em equipe ágil.',
+      "Participação ativa em cerimônias Scrum: dailies, sprints e retrospectivas.",
+      "Deploy e gerenciamento em Microsoft Azure com containers Docker.",
+      "Suporte técnico e melhorias baseadas em feedback de usuários.",
+    ],
+  },
+  {
+    ano: "Hoje",
+    periodo: "Mar/2023 – Atual",
     empresa: "Lamp Brasil",
     cargo: "Gestora de Projetos Web",
+    local: "Belo Horizonte",
     itens: [
       "Gestão do ciclo completo: briefing, wireframes, desenvolvimento, testes e entrega.",
-      "Liderança de equipes técnicas e criativas em projetos simultâneos, com controle de prazos via ClickUp.",
+      "Liderança de equipes técnicas e criativas em projetos simultâneos, com prazos via ClickUp.",
       "Relacionamento com clientes: reuniões, apresentações e suporte pós-entrega.",
       "SEO técnico e monitoramento via Google Analytics 4 e Tag Manager.",
       "Funis de conversão, integrações com CRMs e APIs externas.",
@@ -44,113 +84,147 @@ const experiencias = [
       "IA aplicada (GPT/OpenAI): assistentes virtuais, conteúdo dinâmico e análise preditiva.",
     ],
   },
-  {
-    ano: "2022",
-    nota: "BH",
-    empresa: "EduCAT Tecnologia",
-    cargo: "Desenvolvedora Front-End · Jul/2022 – Fev/2023",
-    itens: [
-      'Plataforma "Diploma Digital" com React (front-end) e Django (back-end) em equipe ágil.',
-      "Participação ativa em cerimônias Scrum: dailies, sprints e retrospectivas.",
-      "Deploy e gerenciamento em Microsoft Azure com containers Docker.",
-      "Suporte técnico e melhorias baseadas em feedback de usuários.",
-    ],
-  },
-  {
-    ano: "2021",
-    nota: "BH",
-    empresa: "Anelo Digital",
-    cargo: "Desenvolvedora Web + Marketing Digital · Out/2021 – Jul/2022",
-    itens: [
-      "Criação e manutenção de sites WordPress e aplicações JavaScript.",
-      "Desenvolvimento e otimização de e-commerces (Shopify, Nuvemshop, Tray).",
-      "Campanhas de tráfego pago: Google Ads e Meta Ads.",
-      "Google Tag Manager, Analytics e estratégias de marketing digital.",
-    ],
-  },
-  {
-    ano: "2021",
-    nota: "BH",
-    empresa: "Salum Construções",
-    cargo: "Jovem Aprendiz — Eletroeletrônica · Jul/2021 – Out/2021",
-    itens: ["Sistemas eletrônicos, circuitos e manutenção básica."],
-  },
+];
+
+const idiomas = [
+  { nome: "Português", nivel: "Nativo", pct: 100, tag: "PT" },
+  { nome: "Inglês", nivel: "Avançado", pct: 85, tag: "EN" },
+  { nome: "Espanhol", nivel: "Básico", pct: 35, tag: "ES" },
 ];
 
 function Index() {
   const [tocandoVideo, setTocandoVideo] = useState(false);
+  const [ativo, setAtivo] = useState(experiencias.length - 1);
+  const exp = experiencias[ativo]!;
 
   return (
     <div className="min-h-screen bg-paper text-ink font-body antialiased selection:bg-accent/15">
-      <header className="fixed inset-x-0 top-0 z-50 border-b border-line bg-paper/85 backdrop-blur">
+      <header className="fixed inset-x-0 top-0 z-50 border-b border-line bg-paper/80 backdrop-blur-md">
         <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
-          <a href="#topo" className="flex items-baseline gap-1 font-display text-lg font-semibold tracking-tight">
-            <span className="text-accent">J</span>úlia A. Garcia
+          <a href="#topo" className="transition-opacity hover:opacity-80">
+            <LogoLockup size={34} />
           </a>
-          <nav className="hidden items-center gap-7 font-mono text-[11px] uppercase tracking-[0.14em] text-soft md:flex">
-            <a href="#perfil" className="underline-offset-4 hover:text-ink hover:underline">Perfil</a>
-            <a href="#video" className="underline-offset-4 hover:text-ink hover:underline">Vídeo</a>
-            <a href="#experiencia" className="underline-offset-4 hover:text-ink hover:underline">Experiência</a>
-            <a href="#competencias" className="underline-offset-4 hover:text-ink hover:underline">Competências</a>
-            <a href="#formacao" className="underline-offset-4 hover:text-ink hover:underline">Formação</a>
-            <a href="#contato" className="text-ink hover:text-accent">Contato</a>
+          <nav className="hidden items-center gap-6 font-mono text-[10px] uppercase tracking-[0.16em] text-soft md:flex">
+            {[
+              ["#perfil", "Perfil"],
+              ["#video", "Vídeo"],
+              ["#experiencia", "Experiência"],
+              ["#competencias", "Competências"],
+              ["#idiomas", "Idiomas"],
+              ["#formacao", "Formação"],
+            ].map(([href, label]) => (
+              <a
+                key={href}
+                href={href}
+                className="relative py-1 transition-colors hover:text-ink after:absolute after:inset-x-0 after:bottom-0 after:h-px after:origin-right after:scale-x-0 after:bg-accent after:transition-transform after:duration-300 hover:after:origin-left hover:after:scale-x-100"
+              >
+                {label}
+              </a>
+            ))}
+            <a
+              href="#contato"
+              className="rounded-full bg-ink px-4 py-2 text-paper transition-colors hover:bg-accent"
+            >
+              Contato
+            </a>
           </nav>
         </div>
       </header>
 
       <main id="topo" className="mx-auto max-w-6xl px-6 pt-28 pb-20">
         {/* Hero */}
-        <section className="grid gap-8 md:grid-cols-12">
-          <div className="reveal md:col-span-8">
-            <p className="mb-5 font-mono text-[11px] uppercase tracking-[0.2em] text-accent">
-              Currículo &nbsp;·&nbsp; 2026
-            </p>
-            <h1 className="text-balance font-display text-[clamp(2.6rem,7vw,5.2rem)] font-semibold leading-[0.95] tracking-tight">
+        <section className="grid items-end gap-8 md:grid-cols-12">
+          <Reveal className="md:col-span-8">
+            <div className="mb-6 flex items-center gap-3">
+              <Logo size={52} />
+              <span className="font-mono text-[10px] uppercase leading-relaxed tracking-[0.2em] text-soft">
+                Júlia Alves Garcia
+                <br />
+                Belo Horizonte, BR
+              </span>
+            </div>
+            <h1 className="text-balance font-display text-[clamp(1.9rem,4.6vw,3.4rem)] font-semibold leading-[1.02] tracking-tight">
               Gestora de Projetos
               <br />
-              Digitais <span className="font-medium italic text-soft">/</span> Full&nbsp;Stack
+              Digitais <span className="font-medium italic text-accent">/</span> Full&nbsp;Stack
             </h1>
-            <div className="rule-draw mt-8 h-px w-full bg-line" />
-            <p className="mt-6 max-w-[58ch] text-pretty text-[15px] leading-relaxed">
+            <div className="rule-draw mt-7 h-px w-full bg-line" />
+            <p className="mt-6 max-w-[58ch] text-pretty text-[14px] leading-relaxed">
               Mais de 4 anos conduzindo ciclos completos de desenvolvimento web, do briefing à entrega.
               Combino visão técnica e de negócio para entregar soluções com alto impacto em performance,
               conversão e experiência do usuário.
             </p>
-            <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3 font-mono text-[12px]">
-              <a href="tel:+5531920027685" className="underline-offset-4 hover:text-accent hover:underline">(31) 92002-7685</a>
-              <a href="mailto:julalvesgarcia@gmail.com" className="underline-offset-4 hover:text-accent hover:underline">julalvesgarcia@gmail.com</a>
-              <a
-                href="https://www.linkedin.com/in/júlia-garcia-683344207"
-                target="_blank"
-                rel="noreferrer"
-                className="underline-offset-4 hover:text-accent hover:underline"
-              >
-                LinkedIn
-              </a>
-              <a
-                href="https://github.com/juliaalvesg"
-                target="_blank"
-                rel="noreferrer"
-                className="underline-offset-4 hover:text-accent hover:underline"
-              >
-                GitHub
-              </a>
+            <div className="mt-7 flex flex-wrap items-center gap-2 font-mono text-[11px]">
+              {[
+                ["tel:+5531920027685", "(31) 92002-7685"],
+                ["mailto:julalvesgarcia@gmail.com", "julalvesgarcia@gmail.com"],
+                ["https://www.linkedin.com/in/júlia-garcia-683344207", "LinkedIn"],
+                ["https://github.com/juliaalvesg", "GitHub"],
+              ].map(([href, label]) => (
+                <a
+                  key={label}
+                  href={href}
+                  target={href!.startsWith("http") ? "_blank" : undefined}
+                  rel="noreferrer"
+                  className="rounded-full border border-line px-3.5 py-1.5 transition-all duration-300 hover:-translate-y-0.5 hover:border-accent hover:text-accent"
+                >
+                  {label}
+                </a>
+              ))}
             </div>
-          </div>
-          <div className="reveal [animation-delay:90ms] md:col-span-4">
-            <img
-              src={retrato}
-              alt="Retrato de Júlia Alves Garcia"
-              width={1024}
-              height={1280}
-              className="aspect-[4/5] w-full object-cover outline-1 -outline-offset-1 outline-black/5"
-            />
-            <p className="mt-3 font-mono text-[10px] uppercase tracking-[0.14em] text-soft">Belo Horizonte, BR</p>
-          </div>
+          </Reveal>
+          <Reveal delay={120} className="md:col-span-4">
+            <div className="group relative overflow-hidden">
+              <img
+                src={retrato}
+                alt="Retrato de Júlia Alves Garcia"
+                width={1024}
+                height={1280}
+                className="aspect-[4/5] w-full object-cover transition-transform duration-[1200ms] ease-[cubic-bezier(0.22,0.8,0.2,1)] group-hover:scale-105"
+              />
+              <span className="pointer-events-none absolute inset-0 bg-accent/0 transition-colors duration-500 group-hover:bg-accent/10" />
+            </div>
+            <div className="mt-4 grid grid-cols-2 gap-3 font-mono text-[10px] uppercase tracking-[0.14em] text-soft">
+              <div className="border-t border-ink pt-2">
+                <span className="block font-display text-2xl font-semibold tracking-tight text-ink">4+</span>
+                anos de mercado
+              </div>
+              <div className="border-t border-ink pt-2">
+                <span className="block font-display text-2xl font-semibold tracking-tight text-ink">3</span>
+                idiomas
+              </div>
+            </div>
+          </Reveal>
         </section>
 
+        {/* Marquee */}
+        <Reveal className="mt-16 overflow-hidden border-y border-line py-3">
+          <div className="marquee flex w-max gap-10 font-mono text-[11px] uppercase tracking-[0.2em] text-soft">
+            {Array.from({ length: 2 }).map((_, r) => (
+              <div key={r} className="flex gap-10">
+                {[
+                  "Gestão de Projetos",
+                  "React",
+                  "Scrum & Kanban",
+                  "SEO Técnico",
+                  "IA Aplicada",
+                  "n8n & Automação",
+                  "WordPress",
+                  "Docker & Azure",
+                  "Analytics 4",
+                ].map((t) => (
+                  <span key={t} className="flex items-center gap-10">
+                    {t}
+                    <span className="text-accent">◆</span>
+                  </span>
+                ))}
+              </div>
+            ))}
+          </div>
+        </Reveal>
+
         {/* Perfil */}
-        <section id="perfil" className="reveal mt-24 grid gap-8 md:grid-cols-12">
+        <Reveal as="section" id="perfil" className="mt-24 grid gap-8 md:grid-cols-12">
           <div className="md:col-span-4">
             <h2 className="font-display text-3xl font-semibold tracking-tight">Perfil</h2>
             <p className="mt-2 font-mono text-[11px] uppercase tracking-[0.14em] text-soft">Quem sou</p>
@@ -167,11 +241,11 @@ function Index() {
               artificial para automação e personalização de campanhas.
             </p>
           </div>
-        </section>
+        </Reveal>
 
         {/* Vídeo */}
-        <section id="video" className="reveal mt-20 -mx-6 [animation-delay:140ms]">
-          <div className="relative aspect-video w-full overflow-hidden bg-[#141311]">
+        <Reveal as="section" id="video" className="mt-20 -mx-6">
+          <div className="group relative aspect-video w-full overflow-hidden bg-[#141311]">
             {tocandoVideo ? (
               <video
                 className="h-full w-full object-cover"
@@ -188,12 +262,12 @@ function Index() {
                   width={1920}
                   height={1088}
                   loading="lazy"
-                  className="h-full w-full object-cover opacity-90"
+                  className="h-full w-full object-cover opacity-90 transition-transform duration-[1400ms] ease-[cubic-bezier(0.22,0.8,0.2,1)] group-hover:scale-105"
                 />
                 <div className="absolute inset-0 grid place-items-center">
                   <button
                     onClick={() => setTocandoVideo(true)}
-                    className="play-pulse grid size-20 place-items-center rounded-full bg-accent/90"
+                    className="play-pulse grid size-20 place-items-center rounded-full bg-accent/90 transition-transform duration-300 hover:scale-110"
                     aria-label="Assistir apresentação em vídeo"
                   >
                     <span className="ml-1 block h-0 w-0 border-y-[11px] border-l-[18px] border-y-transparent border-l-paper" />
@@ -208,53 +282,106 @@ function Index() {
               </>
             )}
           </div>
-        </section>
+        </Reveal>
 
-        {/* Experiência */}
+        {/* Experiência — linha do tempo interativa */}
         <section id="experiencia" className="mt-24">
-          <div className="reveal flex items-end justify-between border-b border-ink pb-3">
+          <Reveal className="flex items-end justify-between border-b border-ink pb-3">
             <h2 className="font-display text-3xl font-semibold tracking-tight">Experiência</h2>
-            <span className="font-mono text-[11px] uppercase tracking-[0.14em] text-soft">2021 — Atual</span>
-          </div>
+            <span className="font-mono text-[11px] uppercase tracking-[0.14em] text-soft">
+              passe o mouse pelos anos
+            </span>
+          </Reveal>
 
-          <div className="mt-10 grid gap-6 md:grid-cols-12">
-            {experiencias.map((exp, i) => (
-              <article
-                key={exp.empresa}
-                className={`reveal md:col-span-12 ${i > 0 ? "mt-6 border-t border-line pt-6" : ""}`}
-                style={{ animationDelay: `${60 * (i + 1)}ms` }}
-              >
-                <div className="grid gap-4 md:grid-cols-12">
-                  <div className="md:col-span-2">
-                    <p className="font-mono text-[12px] text-accent">{exp.ano}</p>
-                    <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.14em] text-soft">{exp.nota}</p>
-                  </div>
-                  <div className="md:col-span-10">
-                    <h3 className="font-display text-xl font-semibold tracking-tight">{exp.empresa}</h3>
-                    <p className="mt-0.5 text-[13px] text-soft">{exp.cargo}</p>
-                    <ul className="mt-4 max-w-[62ch] space-y-1.5 text-[14px] leading-relaxed">
-                      {exp.itens.map((item) => (
-                        <li key={item} className="flex gap-3">
-                          <span className="text-accent">—</span>
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              </article>
-            ))}
-          </div>
+          <Reveal delay={80} className="mt-12">
+            {/* Trilho */}
+            <div className="relative">
+              <div className="absolute inset-x-0 top-[13px] h-px bg-line" />
+              <div
+                className="absolute top-[13px] h-px bg-accent transition-all duration-500 ease-[cubic-bezier(0.22,0.8,0.2,1)]"
+                style={{
+                  left: 0,
+                  width: `${(ativo / (experiencias.length - 1)) * 100}%`,
+                }}
+              />
+              <ol className="relative flex justify-between">
+                {experiencias.map((e, i) => {
+                  const on = i <= ativo;
+                  const atual = i === ativo;
+                  return (
+                    <li key={e.empresa} className="flex flex-col items-center">
+                      <button
+                        onMouseEnter={() => setAtivo(i)}
+                        onFocus={() => setAtivo(i)}
+                        onClick={() => setAtivo(i)}
+                        aria-current={atual}
+                        className="group flex flex-col items-center outline-none"
+                      >
+                        <span
+                          className={`grid size-[27px] place-items-center rounded-full border transition-all duration-400 ${
+                            on ? "border-accent" : "border-line"
+                          } ${atual ? "scale-110 bg-accent" : "bg-paper"}`}
+                        >
+                          <span
+                            className={`size-1.5 rounded-full transition-colors duration-300 ${
+                              atual ? "bg-paper" : on ? "bg-accent" : "bg-line"
+                            }`}
+                          />
+                        </span>
+                        <span
+                          className={`mt-3 font-mono text-[12px] tracking-wide transition-colors duration-300 ${
+                            atual ? "text-accent" : "text-soft group-hover:text-ink"
+                          }`}
+                        >
+                          {e.ano}
+                        </span>
+                        <span
+                          className={`mt-1 hidden font-mono text-[9px] uppercase tracking-[0.14em] transition-opacity duration-300 sm:block ${
+                            atual ? "text-ink opacity-100" : "text-soft opacity-50"
+                          }`}
+                        >
+                          {e.empresa}
+                        </span>
+                      </button>
+                    </li>
+                  );
+                })}
+              </ol>
+            </div>
+
+            {/* Painel */}
+            <div
+              key={exp.empresa}
+              className="reveal mt-12 grid gap-6 border-t border-line pt-8 md:grid-cols-12"
+            >
+              <div className="md:col-span-4">
+                <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-accent">{exp.periodo}</p>
+                <h3 className="mt-2 font-display text-3xl font-semibold leading-tight tracking-tight">
+                  {exp.empresa}
+                </h3>
+                <p className="mt-2 text-[13px] text-soft">{exp.cargo}</p>
+                <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.14em] text-soft">{exp.local}</p>
+              </div>
+              <ul className="grid gap-x-8 gap-y-2 text-[14px] leading-relaxed md:col-span-8 md:grid-cols-2">
+                {exp.itens.map((item) => (
+                  <li key={item} className="flex gap-3">
+                    <span className="text-accent">—</span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </Reveal>
         </section>
 
         {/* Competências */}
         <section id="competencias" className="mt-24 grid gap-8 md:grid-cols-12">
-          <div className="reveal md:col-span-7">
+          <Reveal className="md:col-span-7">
             <h2 className="border-b border-ink pb-3 font-display text-3xl font-semibold tracking-tight">
               Competências
             </h2>
             <p className="mt-5 font-mono text-[11px] uppercase tracking-[0.14em] text-soft">Gestão &amp; Soft Skills</p>
-            <ul className="mt-3 space-y-2 text-[14px] leading-relaxed">
+            <ul className="mt-3 space-y-1">
               {[
                 "Gestão de projetos digitais e equipes técnicas multidisciplinares.",
                 "Metodologias ágeis: Scrum e Kanban — sprints, alinhamentos e retrospectivas.",
@@ -265,16 +392,19 @@ function Index() {
                 "Visão integrada entre tecnologia, UX/UI, branding e experiência do usuário.",
                 "Organização de demandas, cronogramas e garantia de cumprimento de prazos.",
               ].map((item) => (
-                <li key={item} className="flex gap-3">
+                <li
+                  key={item}
+                  className="flex gap-3 rounded-md px-2 py-1.5 text-[14px] leading-relaxed transition-all duration-300 hover:translate-x-1 hover:bg-ink/[0.04]"
+                >
                   <span className="text-accent">—</span>
                   {item}
                 </li>
               ))}
             </ul>
-          </div>
-          <div className="reveal [animation-delay:90ms] md:col-span-5">
+          </Reveal>
+          <Reveal delay={120} className="md:col-span-5">
             <p className="mt-5 font-mono text-[11px] uppercase tracking-[0.14em] text-soft">Stack Técnica</p>
-            <div className="mt-3 space-y-3 text-[14px]">
+            <div className="mt-3 space-y-2">
               {[
                 ["Front-End", "HTML5, CSS3, JavaScript, TypeScript, React, Bootstrap"],
                 ["Back-End", "Node.js, PHP, Django, C#, Java, SQL, Python (básico)"],
@@ -285,72 +415,114 @@ function Index() {
                 ["Gestão", "ClickUp, Trello, Jira, controle de squads"],
                 ["Automação", "APIs REST, Webhooks, n8n, WhatsApp API, CRMs"],
               ].map(([titulo, conteudo]) => (
-                <div key={titulo}>
-                  <p className="text-[12px] text-soft">{titulo}</p>
+                <div
+                  key={titulo}
+                  className="group border-l-2 border-line py-1.5 pl-4 text-[14px] transition-colors duration-300 hover:border-accent"
+                >
+                  <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-soft transition-colors group-hover:text-accent">
+                    {titulo}
+                  </p>
                   <p className="mt-0.5">{conteudo}</p>
                 </div>
               ))}
             </div>
-          </div>
+          </Reveal>
         </section>
+
+        {/* Idiomas — destaque */}
+        <Reveal as="section" id="idiomas" className="mt-24 -mx-6 bg-ink px-6 py-14 text-paper md:px-12">
+          <div className="grid gap-10 md:grid-cols-12">
+            <div className="md:col-span-4">
+              <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-accent">Idiomas</p>
+              <h2 className="mt-3 font-display text-4xl font-semibold leading-tight tracking-tight">
+                Comunicação sem <span className="italic">fronteiras</span>
+              </h2>
+              <p className="mt-4 max-w-[38ch] text-[14px] leading-relaxed text-paper/70">
+                Dois meses de imersão no Canadá consolidaram meu inglês avançado — hoje conduzo reuniões,
+                documentação técnica e conteúdo em inglês com naturalidade.
+              </p>
+            </div>
+            <div className="space-y-7 md:col-span-8 md:pt-2">
+              {idiomas.map((l, i) => (
+                <div key={l.nome} className="group">
+                  <div className="flex items-baseline justify-between">
+                    <p className="font-display text-2xl font-semibold tracking-tight">
+                      <span className="mr-3 font-mono text-[11px] uppercase tracking-[0.2em] text-accent">
+                        {l.tag}
+                      </span>
+                      {l.nome}
+                    </p>
+                    <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-paper/60">{l.nivel}</p>
+                  </div>
+                  <div className="mt-3 h-[3px] w-full overflow-hidden bg-paper/15">
+                    <div
+                      className="bar-grow h-full bg-accent"
+                      style={{ width: `${l.pct}%`, animationDelay: `${i * 160}ms` }}
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </Reveal>
 
         {/* Formação */}
         <section id="formacao" className="mt-24 grid gap-8 md:grid-cols-12">
-          <div className="reveal md:col-span-7">
+          <Reveal className="md:col-span-7">
             <h2 className="border-b border-ink pb-3 font-display text-3xl font-semibold tracking-tight">
               Formação
             </h2>
-            <div className="mt-5 space-y-5">
-              <div>
-                <h3 className="font-display text-lg font-semibold tracking-tight">
-                  Bacharelado em Ciência da Computação
-                </h3>
-                <p className="mt-0.5 text-[13px] text-soft">Dom Helder · Fev/2023 – Dez/2026 (cursando)</p>
-              </div>
-              <div>
-                <h3 className="font-display text-lg font-semibold tracking-tight">
-                  Ensino Médio + Técnico em Informática
-                </h3>
-                <p className="mt-0.5 text-[13px] text-soft">COTEMIG · Fev/2020 – Dez/2022</p>
-              </div>
-              <div>
-                <h3 className="font-display text-lg font-semibold tracking-tight">
-                  Intercâmbio no Canadá
-                </h3>
-                <p className="mt-0.5 text-[13px] text-soft">2 meses de imersão em inglês</p>
-              </div>
+            <div className="mt-5 space-y-3">
+              {[
+                ["Bacharelado em Ciência da Computação", "Dom Helder · Fev/2023 – Dez/2026 (cursando)"],
+                ["Ensino Médio + Técnico em Informática", "COTEMIG · Fev/2020 – Dez/2022"],
+                ["Intercâmbio no Canadá", "2 meses de imersão em inglês"],
+              ].map(([titulo, sub]) => (
+                <div
+                  key={titulo}
+                  className="border-l-2 border-line py-1.5 pl-4 transition-all duration-300 hover:translate-x-1 hover:border-accent"
+                >
+                  <h3 className="font-display text-lg font-semibold tracking-tight">{titulo}</h3>
+                  <p className="mt-0.5 text-[13px] text-soft">{sub}</p>
+                </div>
+              ))}
             </div>
 
             <p className="mt-8 font-mono text-[11px] uppercase tracking-[0.14em] text-soft">Educação complementar</p>
-            <ul className="mt-3 space-y-2 text-[14px] leading-relaxed">
+            <ul className="mt-3 flex flex-wrap gap-2">
               {[
-                "Ferramentas G Suite — Google For Education Edtech.",
-                "Ferramentas de TI: Hardware e Software — Fundação Bradesco.",
-                "Segurança em Tecnologia da Informação — Fundação Bradesco.",
-                "Marketing de Conteúdo — Rock University (2021).",
-                "Agente de Aceleração — Faculdade Cotemig e Cotemig Startup (2022).",
-                "Social Media — Udemy (2022).",
+                "Ferramentas G Suite — Google For Education",
+                "Hardware e Software — Fundação Bradesco",
+                "Segurança da Informação — Fundação Bradesco",
+                "Marketing de Conteúdo — Rock University",
+                "Agente de Aceleração — Cotemig Startup",
+                "Social Media — Udemy",
               ].map((item) => (
-                <li key={item} className="flex gap-3">
-                  <span className="text-accent">—</span>
+                <li
+                  key={item}
+                  className="rounded-full border border-line px-3.5 py-1.5 text-[12px] transition-all duration-300 hover:-translate-y-0.5 hover:border-accent hover:text-accent"
+                >
                   {item}
                 </li>
               ))}
             </ul>
-          </div>
+          </Reveal>
 
-          <div className="reveal [animation-delay:90ms] md:col-span-5">
+          <Reveal delay={120} className="md:col-span-5">
             <p className="mt-5 font-mono text-[11px] uppercase tracking-[0.14em] text-soft">
               Conquistas &amp; reconhecimentos
             </p>
-            <ul className="mt-3 space-y-2 text-[14px] leading-relaxed">
+            <ul className="mt-3 space-y-1">
               {[
                 ["1º", "Cotemig Startups — startup de controle autônomo de frequência escolar"],
                 ["2º", "Hackathon EMGE | Dom Helder"],
                 ["2º", "NASA Space Apps Challenge 2022"],
                 ["★", "The Best of the Class — COTEMIG 2020, 2021 e 2022"],
               ].map(([marca, texto]) => (
-                <li key={texto} className="flex gap-3">
+                <li
+                  key={texto}
+                  className="flex gap-3 rounded-md px-2 py-1.5 text-[14px] leading-relaxed transition-all duration-300 hover:translate-x-1 hover:bg-ink/[0.04]"
+                >
                   <span className="font-mono text-[12px] text-accent">{marca}</span>
                   {texto}
                 </li>
@@ -358,53 +530,50 @@ function Index() {
             </ul>
 
             <p className="mt-8 font-mono text-[11px] uppercase tracking-[0.14em] text-soft">Vida acadêmica</p>
-            <ul className="mt-3 space-y-2 text-[14px] leading-relaxed">
-              <li className="flex gap-3">
-                <span className="text-accent">—</span>
-                Representante de turma nos 3 primeiros anos da faculdade.
-              </li>
-              <li className="flex gap-3">
-                <span className="text-accent">—</span>
-                Voluntária no hackathon da Dom Helder — uma forma de fomentar a inovação.
-              </li>
-              <li className="flex gap-3">
-                <span className="text-accent">—</span>
-                Voluntária no CodeClub, ensinando programação para jovens.
-              </li>
+            <ul className="mt-3 space-y-1">
+              {[
+                "Representante de turma nos 3 primeiros anos da faculdade.",
+                "Voluntária no hackathon da Dom Helder — uma forma de fomentar a inovação.",
+                "Voluntária no CodeClub, ensinando programação para jovens.",
+              ].map((t) => (
+                <li
+                  key={t}
+                  className="flex gap-3 rounded-md px-2 py-1.5 text-[14px] leading-relaxed transition-all duration-300 hover:translate-x-1 hover:bg-ink/[0.04]"
+                >
+                  <span className="text-accent">—</span>
+                  {t}
+                </li>
+              ))}
             </ul>
-
-            <p className="mt-8 font-mono text-[11px] uppercase tracking-[0.14em] text-soft">Idiomas</p>
-            <div className="mt-3 space-y-1 text-[14px]">
-              <p>Inglês — Avançado</p>
-              <p>Espanhol — Básico</p>
-            </div>
-          </div>
+          </Reveal>
         </section>
 
         {/* Contato */}
-        <footer id="contato" className="reveal mt-24 border-t border-ink pt-10 [animation-delay:120ms]">
+        <Reveal as="footer" id="contato" className="mt-24 border-t border-ink pt-10">
           <div className="grid items-end gap-8 md:grid-cols-12">
             <div className="md:col-span-7">
               <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-accent">Próximo passo</p>
-              <h2 className="mt-3 text-balance font-display text-[clamp(2rem,5vw,3.5rem)] font-semibold leading-[1.02] tracking-tight">
+              <h2 className="mt-3 text-balance font-display text-[clamp(1.8rem,4.2vw,3rem)] font-semibold leading-[1.04] tracking-tight">
                 Vamos construir algo <span className="font-medium italic">juntos</span>.
               </h2>
             </div>
             <div className="md:col-span-5">
               <a
                 href="mailto:julalvesgarcia@gmail.com"
-                className="group inline-flex items-center gap-3 border border-ink px-6 py-3 text-[15px] font-medium transition-colors duration-300 hover:bg-ink hover:text-paper"
+                className="group inline-flex items-center gap-3 rounded-full border border-ink px-6 py-3 text-[15px] font-medium transition-all duration-300 hover:bg-ink hover:text-paper"
               >
                 julalvesgarcia@gmail.com
                 <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
               </a>
             </div>
           </div>
-          <div className="mt-12 flex flex-wrap justify-between gap-3 border-t border-line pt-5 font-mono text-[10px] uppercase tracking-[0.14em] text-soft">
-            <span>© 2026 Júlia Alves Garcia</span>
+          <div className="mt-12 flex flex-wrap items-center justify-between gap-3 border-t border-line pt-5 font-mono text-[10px] uppercase tracking-[0.14em] text-soft">
+            <span className="flex items-center gap-2">
+              <Logo size={22} /> © 2026 Júlia Alves Garcia
+            </span>
             <span>Representante de turma · Voluntária CodeClub · Intercâmbio Canadá</span>
           </div>
-        </footer>
+        </Reveal>
       </main>
     </div>
   );
