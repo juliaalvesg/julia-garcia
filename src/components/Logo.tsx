@@ -21,13 +21,10 @@ export function Logo({ className = "", size = 40 }: Props) {
 
 export function LogoLockup({ size = 40 }: Props) {
   return (
-    <span className="flex items-center gap-2.5">
+    <span className="flex min-w-0 items-center gap-2.5">
       <Logo size={size} />
-      <span className="flex flex-col leading-none">
-        <span className="font-display text-[15px] font-semibold tracking-tight">Júlia A. Garcia</span>
-        <span className="mt-1 font-mono text-[9px] uppercase tracking-[0.22em] text-soft">
-          digital projects
-        </span>
+      <span className="truncate font-display text-[15px] font-semibold tracking-tight">
+        Júlia A. Garcia
       </span>
     </span>
   );
