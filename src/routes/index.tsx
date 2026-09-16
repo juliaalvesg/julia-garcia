@@ -1,6 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import retrato from "@/assets/retrato.jpg";
+import retratoAsset from "@/assets/julia-retrato.jpg.asset.json";
+
+const retrato = retratoAsset.url;
 import videoPoster from "@/assets/video-poster.jpg";
 import { Reveal } from "@/components/Reveal";
 import { Logo, LogoLockup } from "@/components/Logo";
