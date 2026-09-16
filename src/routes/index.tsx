@@ -102,9 +102,15 @@ function Index() {
   return (
     <div className="min-h-screen bg-paper text-ink font-body antialiased selection:bg-accent/15">
       <header className="fixed inset-x-0 top-0 z-50 border-b border-line bg-paper/80 backdrop-blur-md">
-        <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
-          <a href="#topo" className="transition-opacity hover:opacity-80">
-            <LogoLockup size={34} />
+        <div className="mx-auto grid h-16 max-w-6xl grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-4 sm:px-6">
+          <a href="#topo" className="min-w-0 transition-opacity hover:opacity-80">
+            <LogoLockup size={32} />
+          </a>
+          <a
+            href="#contato"
+            className="shrink-0 rounded-full bg-ink px-4 py-2 font-mono text-[10px] uppercase tracking-[0.16em] text-paper transition-colors hover:bg-accent md:hidden"
+          >
+            Contato
           </a>
           <nav className="hidden items-center gap-6 font-mono text-[10px] uppercase tracking-[0.16em] text-soft md:flex">
             {[
@@ -133,7 +139,7 @@ function Index() {
         </div>
       </header>
 
-      <main id="topo" className="mx-auto max-w-6xl px-6 pt-28 pb-20">
+      <main id="topo" className="mx-auto max-w-6xl px-4 pt-24 pb-16 sm:px-6 sm:pt-28 sm:pb-20">
         {/* Hero */}
         <section className="grid items-end gap-8 md:grid-cols-12">
           <Reveal className="md:col-span-8">
@@ -200,7 +206,7 @@ function Index() {
         </section>
 
         {/* Marquee */}
-        <Reveal className="mt-16 overflow-hidden border-y border-line py-3">
+        <Reveal className="mt-14 -mx-4 overflow-hidden border-y border-line py-3 sm:mx-0 sm:mt-16">
           <div className="marquee flex w-max gap-10 font-mono text-[11px] uppercase tracking-[0.2em] text-soft">
             {Array.from({ length: 2 }).map((_, r) => (
               <div key={r} className="flex gap-10">
@@ -226,7 +232,7 @@ function Index() {
         </Reveal>
 
         {/* Perfil */}
-        <Reveal as="section" id="perfil" className="mt-24 grid gap-8 md:grid-cols-12">
+        <Reveal as="section" id="perfil" className="mt-16 grid gap-6 sm:gap-8 md:mt-24 md:grid-cols-12">
           <div className="md:col-span-4">
             <h2 className="font-display text-3xl font-semibold tracking-tight">Perfil</h2>
             <p className="mt-2 font-mono text-[11px] uppercase tracking-[0.14em] text-soft">Quem sou</p>
@@ -246,7 +252,7 @@ function Index() {
         </Reveal>
 
         {/* Vídeo */}
-        <Reveal as="section" id="video" className="mt-20 -mx-6">
+        <Reveal as="section" id="video" className="mt-16 -mx-4 sm:mt-20 sm:-mx-6">
           <div className="group relative aspect-video w-full overflow-hidden bg-[#141311]">
             {tocandoVideo ? (
               <video
@@ -275,11 +281,13 @@ function Index() {
                     <span className="ml-1 block h-0 w-0 border-y-[11px] border-l-[18px] border-y-transparent border-l-paper" />
                   </button>
                 </div>
-                <div className="absolute bottom-6 left-6 text-paper">
+                <div className="absolute bottom-4 left-4 text-paper sm:bottom-6 sm:left-6">
                   <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-paper/60">
                     01 &nbsp;·&nbsp; Apresentação
                   </p>
-                  <p className="mt-1 font-display text-2xl font-medium italic">Conheça meu trabalho</p>
+                  <p className="mt-1 font-display text-lg font-medium italic sm:text-2xl">
+                    Conheça meu trabalho
+                  </p>
                 </div>
               </>
             )}
@@ -287,11 +295,11 @@ function Index() {
         </Reveal>
 
         {/* Experiência — linha do tempo interativa */}
-        <section id="experiencia" className="mt-24">
-          <Reveal className="flex items-end justify-between border-b border-ink pb-3">
-            <h2 className="font-display text-3xl font-semibold tracking-tight">Experiência</h2>
-            <span className="font-mono text-[11px] uppercase tracking-[0.14em] text-soft">
-              passe o mouse pelos anos
+        <section id="experiencia" className="mt-16 md:mt-24">
+          <Reveal className="flex flex-wrap items-end justify-between gap-2 border-b border-ink pb-3">
+            <h2 className="font-display text-2xl font-semibold tracking-tight sm:text-3xl">Experiência</h2>
+            <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-soft sm:text-[11px]">
+              toque ou passe o mouse pelos anos
             </span>
           </Reveal>
 
