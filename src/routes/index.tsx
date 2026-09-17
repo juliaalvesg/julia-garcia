@@ -98,6 +98,7 @@ function Index() {
   const [tocandoVideo, setTocandoVideo] = useState(false);
   const [ativo, setAtivo] = useState(experiencias.length - 1);
   const exp = experiencias[ativo]!;
+  const parallax = useParallax(0.06);
 
   return (
     <div className="min-h-screen bg-paper text-ink font-body antialiased selection:bg-accent/15">
