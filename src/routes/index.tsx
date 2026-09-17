@@ -392,71 +392,80 @@ function Index() {
 
         {/* Projeto em destaque */}
         <section id="projeto" className="mt-16 md:mt-24">
-          <Reveal className="flex flex-wrap items-end justify-between gap-2 border-b border-ink pb-3">
-            <h2 className="font-display text-2xl font-semibold tracking-tight sm:text-3xl">
-              Projeto em destaque
-            </h2>
-            <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-soft sm:text-[11px]">
-              mais recente · 2026
-            </span>
-          </Reveal>
+          <Reveal className="border-y-4 border-accent px-0 py-10 sm:px-2 sm:py-14">
+            <div className="flex flex-col gap-10 md:flex-row md:items-start md:justify-between">
+              {/* Esquerda */}
+              <div className="flex-1">
+                <span className="mb-4 block font-mono text-[10px] font-semibold uppercase tracking-[0.22em] text-accent">
+                  [ Projeto em destaque · 2026 ]
+                </span>
+                <h2 className="font-display text-[clamp(2.2rem,6vw,4.2rem)] font-bold italic leading-[1.05] tracking-tight">
+                  Chatbot de
+                  <br />
+                  WhatsApp com IA
+                </h2>
+                <p className="mt-6 max-w-md text-pretty text-[17px] leading-relaxed opacity-90">
+                  Arquitetura completa de atendimento automatizado no WhatsApp, integrando geração de
+                  respostas por IA, persistência de dados em tempo real e continuidade humana.
+                </p>
 
-          <Reveal delay={80} className="mt-8 grid gap-8 md:grid-cols-12">
-            <div className="md:col-span-5">
-              <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-accent">
-                Automação &amp; IA
-              </p>
-              <h3 className="mt-2 font-display text-2xl font-semibold leading-tight tracking-tight sm:text-3xl">
-                Chatbot de WhatsApp com automação inteligente
-              </h3>
-              <p className="mt-4 text-pretty text-[15px] leading-relaxed">
-                Atendimento automatizado de ponta a ponta no WhatsApp: fluxos conversacionais orquestrados no
-                n8n, respostas geradas por IA, histórico e dados persistidos em banco, e continuidade humana
-                pela central de atendimento — com integração aos serviços do Google.
-              </p>
-              <ul className="mt-5 space-y-2 text-[14px] leading-relaxed">
-                {[
-                  "Orquestração dos fluxos e webhooks no n8n.",
-                  "Integração oficial com a API da Meta (WhatsApp Business).",
-                  "Respostas contextuais com a API do GPT.",
-                  "Banco de dados e autenticação no Supabase.",
-                  "Transbordo para atendimento humano via Chatwoot.",
-                  "Integração com APIs do Google (agenda e planilhas).",
-                ].map((i) => (
-                  <li key={i} className="flex gap-3">
-                    <span className="text-accent">—</span>
-                    {i}
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className="md:col-span-7">
-              <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-                {["n8n", "Supabase", "Meta API", "Chatwoot", "GPT API", "Google API"].map((t, i) => (
-                  <div
-                    key={t}
-                    style={{ transitionDelay: `${i * 40}ms` }}
-                    className="group border border-line bg-paper p-4 transition-all duration-300 hover:-translate-y-1 hover:border-accent"
-                  >
-                    <span className="block font-mono text-[10px] uppercase tracking-[0.16em] text-soft">
-                      0{i + 1}
-                    </span>
-                    <span className="mt-2 block font-display text-lg font-semibold tracking-tight transition-colors group-hover:text-accent">
+                <div className="mt-10">
+                  <h3 className="mb-4 font-mono text-[11px] uppercase tracking-[0.16em] text-accent">
+                    Entregas principais
+                  </h3>
+                  <ul className="space-y-2 text-[14px] leading-relaxed">
+                    {[
+                      "Orquestração de fluxos e webhooks no n8n.",
+                      "Integração direta com a API da Meta (WhatsApp Business).",
+                      "Respostas contextuais com a API do GPT.",
+                      "Memória e banco de dados no Supabase.",
+                      "Transbordo para atendimento humano no Chatwoot.",
+                      "Integração com APIs do Google (agenda e planilhas).",
+                    ].map((i) => (
+                      <li key={i} className="flex items-start gap-3">
+                        <span className="mt-2 size-1.5 shrink-0 rounded-full bg-accent" />
+                        {i}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+
+              {/* Direita */}
+              <div className="flex w-full flex-col gap-8 md:w-80 md:shrink-0">
+                <div className="border border-line bg-[#EAE7E0] p-6">
+                  <h3 className="mb-6 border-b border-line pb-2 font-mono text-[10px] uppercase tracking-[0.2em]">
+                    Fluxo de dados
+                  </h3>
+                  <div className="space-y-4 font-mono text-[11px]">
+                    <div className="flex items-center gap-3">
+                      <span className="bg-ink px-2 py-1 text-paper">WhatsApp</span>
+                      <span className="text-accent">→</span>
+                      <span className="border border-ink px-2 py-1">n8n</span>
+                    </div>
+                    <div className="ml-8 text-accent">↓</div>
+                    <div className="ml-4 flex items-center gap-3">
+                      <span className="border border-ink px-2 py-1">GPT API</span>
+                      <span className="text-accent">↔</span>
+                      <span className="border border-ink px-2 py-1">Supabase</span>
+                    </div>
+                    <div className="ml-8 text-accent">↓</div>
+                    <div className="flex items-center gap-3">
+                      <span className="bg-accent px-2 py-1 text-paper">Chatwoot</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex flex-wrap gap-2">
+                  {["n8n", "Supabase", "Meta API", "Chatwoot", "GPT API", "Google API"].map((t) => (
+                    <span
+                      key={t}
+                      className="border border-ink px-2 py-0.5 font-mono text-[10px] transition-colors duration-300 hover:bg-ink hover:text-paper"
+                    >
                       {t}
                     </span>
-                  </div>
-                ))}
-              </div>
-              <div className="mt-3 flex flex-wrap items-center gap-2 border border-line p-4 font-mono text-[11px] uppercase tracking-[0.14em] text-soft">
-                <span>WhatsApp</span>
-                <span className="text-accent">→</span>
-                <span>n8n</span>
-                <span className="text-accent">→</span>
-                <span>GPT</span>
-                <span className="text-accent">→</span>
-                <span>Supabase</span>
-                <span className="text-accent">→</span>
-                <span>Chatwoot</span>
+                  ))}
+                </div>
               </div>
             </div>
           </Reveal>
