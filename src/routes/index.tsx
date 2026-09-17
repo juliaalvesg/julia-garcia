@@ -156,8 +156,7 @@ function Index() {
               <br />
               Digitais <span className="font-medium italic text-accent">/</span> Full&nbsp;Stack
             </h1>
-            <div className="rule-draw mt-7 h-px w-full bg-line" />
-            <p className="mt-6 max-w-[58ch] text-pretty text-[14px] leading-relaxed">
+            <p className="mt-7 max-w-[58ch] text-pretty text-[14px] leading-relaxed">
               Mais de 4 anos conduzindo ciclos completos de desenvolvimento web, do briefing à entrega.
               Combino visão técnica e de negócio para entregar soluções com alto impacto em performance,
               conversão e experiência do usuário.
