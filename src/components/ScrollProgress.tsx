@@ -42,7 +42,7 @@ export function useParallax(strength = 0.08) {
     let raf = 0;
     const update = () => {
       raf = 0;
-      setY(window.scrollY * strength);
+      setY(Math.min(60, window.scrollY * strength));
     };
     const onScroll = () => {
       if (!raf) raf = requestAnimationFrame(update);
