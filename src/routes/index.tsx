@@ -120,6 +120,7 @@ function Index() {
               ["#perfil", "Perfil"],
               ["#video", "Vídeo"],
               ["#experiencia", "Experiência"],
+              ["#projeto", "Projeto"],
               ["#competencias", "Competências"],
               ["#idiomas", "Idiomas"],
               ["#formacao", "Formação"],
