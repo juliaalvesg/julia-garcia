@@ -6,6 +6,7 @@ const retrato = retratoAsset.url;
 import videoPoster from "@/assets/video-poster.jpg";
 import { Reveal } from "@/components/Reveal";
 import { Logo, LogoLockup } from "@/components/Logo";
+import { ScrollProgress, useParallax } from "@/components/ScrollProgress";
 
 export const Route = createFileRoute("/")({
   head: () => ({
