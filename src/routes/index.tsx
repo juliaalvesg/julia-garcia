@@ -103,6 +103,7 @@ function Index() {
 
   return (
     <div className="min-h-screen bg-paper text-ink font-body antialiased selection:bg-accent/15">
+      <ScrollProgress />
       <header className="fixed inset-x-0 top-0 z-50 border-b border-line bg-paper/80 backdrop-blur-md">
         <div className="mx-auto grid h-16 max-w-6xl grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-4 sm:px-6">
           <a href="#topo" className="min-w-0 transition-opacity hover:opacity-80">
