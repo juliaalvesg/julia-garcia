@@ -181,13 +181,14 @@ function Index() {
             </div>
           </Reveal>
           <Reveal delay={120} className="md:col-span-4">
-            <div className="group relative overflow-hidden">
+            <div className="group relative aspect-[4/5] w-full overflow-hidden">
               <img
                 src={retrato}
                 alt="Retrato de Júlia Alves Garcia"
                 width={1024}
                 height={1280}
-                className="aspect-[4/5] w-full object-cover transition-transform duration-[1200ms] ease-[cubic-bezier(0.22,0.8,0.2,1)] group-hover:scale-105"
+                className="h-[112%] w-full object-cover transition-transform duration-500 ease-out will-change-transform"
+                style={{ transform: `translate3d(0, ${-parallax}px, 0)` }}
               />
               <span className="pointer-events-none absolute inset-0 bg-accent/0 transition-colors duration-500 group-hover:bg-accent/10" />
             </div>
