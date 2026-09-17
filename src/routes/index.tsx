@@ -6,6 +6,7 @@ const retrato = retratoAsset.url;
 import videoPoster from "@/assets/video-poster.jpg";
 import { Reveal } from "@/components/Reveal";
 import { Logo, LogoLockup } from "@/components/Logo";
+import { ScrollProgress, useParallax } from "@/components/ScrollProgress";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -98,9 +99,11 @@ function Index() {
   const [tocandoVideo, setTocandoVideo] = useState(false);
   const [ativo, setAtivo] = useState(experiencias.length - 1);
   const exp = experiencias[ativo]!;
+  const parallax = useParallax(0.06);
 
   return (
     <div className="min-h-screen bg-paper text-ink font-body antialiased selection:bg-accent/15">
+      <ScrollProgress />
       <header className="fixed inset-x-0 top-0 z-50 border-b border-line bg-paper/80 backdrop-blur-md">
         <div className="mx-auto grid h-16 max-w-6xl grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-4 sm:px-6">
           <a href="#topo" className="min-w-0 transition-opacity hover:opacity-80">
@@ -117,6 +120,7 @@ function Index() {
               ["#perfil", "Perfil"],
               ["#video", "Vídeo"],
               ["#experiencia", "Experiência"],
+              ["#projeto", "Projeto"],
               ["#competencias", "Competências"],
               ["#idiomas", "Idiomas"],
               ["#formacao", "Formação"],
@@ -156,8 +160,7 @@ function Index() {
               <br />
               Digitais <span className="font-medium italic text-accent">/</span> Full&nbsp;Stack
             </h1>
-            <div className="rule-draw mt-7 h-px w-full bg-line" />
-            <p className="mt-6 max-w-[58ch] text-pretty text-[14px] leading-relaxed">
+            <p className="mt-7 max-w-[58ch] text-pretty text-[14px] leading-relaxed">
               Mais de 4 anos conduzindo ciclos completos de desenvolvimento web, do briefing à entrega.
               Combino visão técnica e de negócio para entregar soluções com alto impacto em performance,
               conversão e experiência do usuário.
@@ -182,13 +185,14 @@ function Index() {
             </div>
           </Reveal>
           <Reveal delay={120} className="md:col-span-4">
-            <div className="group relative overflow-hidden">
+            <div className="group relative aspect-[4/5] w-full overflow-hidden">
               <img
                 src={retrato}
                 alt="Retrato de Júlia Alves Garcia"
                 width={1024}
                 height={1280}
-                className="aspect-[4/5] w-full object-cover transition-transform duration-[1200ms] ease-[cubic-bezier(0.22,0.8,0.2,1)] group-hover:scale-105"
+                className="h-[112%] w-full object-cover transition-transform duration-500 ease-out will-change-transform"
+                style={{ transform: `translate3d(0, ${-parallax}px, 0)` }}
               />
               <span className="pointer-events-none absolute inset-0 bg-accent/0 transition-colors duration-500 group-hover:bg-accent/10" />
             </div>
@@ -382,6 +386,78 @@ function Index() {
                   </li>
                 ))}
               </ul>
+            </div>
+          </Reveal>
+        </section>
+
+        {/* Projeto em destaque */}
+        <section id="projeto" className="mt-16 md:mt-24">
+          <Reveal className="flex flex-wrap items-end justify-between gap-2 border-b border-ink pb-3">
+            <h2 className="font-display text-2xl font-semibold tracking-tight sm:text-3xl">
+              Projeto em destaque
+            </h2>
+            <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-soft sm:text-[11px]">
+              mais recente · 2026
+            </span>
+          </Reveal>
+
+          <Reveal delay={80} className="mt-8 grid gap-8 md:grid-cols-12">
+            <div className="md:col-span-5">
+              <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-accent">
+                Automação &amp; IA
+              </p>
+              <h3 className="mt-2 font-display text-2xl font-semibold leading-tight tracking-tight sm:text-3xl">
+                Chatbot de WhatsApp com automação inteligente
+              </h3>
+              <p className="mt-4 text-pretty text-[15px] leading-relaxed">
+                Atendimento automatizado de ponta a ponta no WhatsApp: fluxos conversacionais orquestrados no
+                n8n, respostas geradas por IA, histórico e dados persistidos em banco, e continuidade humana
+                pela central de atendimento — com integração aos serviços do Google.
+              </p>
+              <ul className="mt-5 space-y-2 text-[14px] leading-relaxed">
+                {[
+                  "Orquestração dos fluxos e webhooks no n8n.",
+                  "Integração oficial com a API da Meta (WhatsApp Business).",
+                  "Respostas contextuais com a API do GPT.",
+                  "Banco de dados e autenticação no Supabase.",
+                  "Transbordo para atendimento humano via Chatwoot.",
+                  "Integração com APIs do Google (agenda e planilhas).",
+                ].map((i) => (
+                  <li key={i} className="flex gap-3">
+                    <span className="text-accent">—</span>
+                    {i}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="md:col-span-7">
+              <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+                {["n8n", "Supabase", "Meta API", "Chatwoot", "GPT API", "Google API"].map((t, i) => (
+                  <div
+                    key={t}
+                    style={{ transitionDelay: `${i * 40}ms` }}
+                    className="group border border-line bg-paper p-4 transition-all duration-300 hover:-translate-y-1 hover:border-accent"
+                  >
+                    <span className="block font-mono text-[10px] uppercase tracking-[0.16em] text-soft">
+                      0{i + 1}
+                    </span>
+                    <span className="mt-2 block font-display text-lg font-semibold tracking-tight transition-colors group-hover:text-accent">
+                      {t}
+                    </span>
+                  </div>
+                ))}
+              </div>
+              <div className="mt-3 flex flex-wrap items-center gap-2 border border-line p-4 font-mono text-[11px] uppercase tracking-[0.14em] text-soft">
+                <span>WhatsApp</span>
+                <span className="text-accent">→</span>
+                <span>n8n</span>
+                <span className="text-accent">→</span>
+                <span>GPT</span>
+                <span className="text-accent">→</span>
+                <span>Supabase</span>
+                <span className="text-accent">→</span>
+                <span>Chatwoot</span>
+              </div>
             </div>
           </Reveal>
         </section>
