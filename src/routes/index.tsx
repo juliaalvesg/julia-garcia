@@ -95,8 +95,14 @@ const idiomas = [
   { nome: "Espanhol", nivel: "Básico", pct: 35, tag: "ES" },
 ];
 
+const videosApresentacao = {
+  pt: { id: "ym_T0ssRYxo", titulo: "Conheça meu trabalho" },
+  en: { id: "Lvh9PjR7Bzc", titulo: "Get to know my work" },
+} as const;
+
 function Index() {
   const [tocandoVideo, setTocandoVideo] = useState(false);
+  const [idiomaVideo, setIdiomaVideo] = useState<"pt" | "en">("pt");
   const [ativo, setAtivo] = useState(experiencias.length - 1);
   const exp = experiencias[ativo]!;
   const parallax = useParallax(0.06);
