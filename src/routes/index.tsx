@@ -151,8 +151,8 @@ function Index() {
 
       <main id="topo" className="mx-auto max-w-6xl px-4 pt-24 pb-16 sm:px-6 sm:pt-28 sm:pb-20">
         {/* Hero */}
-        <section className="grid items-end gap-8 md:grid-cols-12">
-          <Reveal className="md:col-span-8">
+        <section className="grid items-center gap-8 md:grid-cols-12">
+          <Reveal className="flex flex-col justify-center md:col-span-8">
             <div className="mb-6 flex items-center gap-3">
               <Logo size={52} />
               <span className="font-mono text-[10px] uppercase leading-relaxed tracking-[0.2em] text-soft">
