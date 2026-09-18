@@ -257,40 +257,65 @@ function Index() {
 
         {/* Vídeo */}
         <Reveal as="section" id="video" className="mt-16 -mx-4 sm:mt-20 sm:-mx-6">
+          <div className="mb-4 flex flex-wrap items-center justify-between gap-3 px-4 sm:px-6">
+            <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-soft">
+              01 &nbsp;·&nbsp; Apresentação em vídeo
+            </p>
+            <div className="flex gap-2">
+              {(["pt", "en"] as const).map((l) => (
+                <button
+                  key={l}
+                  onClick={() => {
+                    setIdiomaVideo(l);
+                    setTocandoVideo(false);
+                  }}
+                  className={`rounded-full border px-4 py-1.5 font-mono text-[10px] uppercase tracking-[0.16em] transition-all duration-300 ${
+                    idiomaVideo === l
+                      ? "border-accent bg-accent text-paper"
+                      : "border-line text-soft hover:border-accent hover:text-accent"
+                  }`}
+                >
+                  {l === "pt" ? "Português" : "English"}
+                </button>
+              ))}
+            </div>
+          </div>
           <div className="group relative aspect-video w-full overflow-hidden bg-[#141311]">
             {tocandoVideo ? (
-              <video
-                className="h-full w-full object-cover"
-                src="/videos/apresentacao.mp4"
-                poster={videoPoster}
-                controls
-                autoPlay
+              <iframe
+                key={idiomaVideo}
+                className="h-full w-full"
+                src={`https://www.youtube.com/embed/${videosApresentacao[idiomaVideo].id}?autoplay=1&rel=0`}
+                title={videosApresentacao[idiomaVideo].titulo}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
               />
             ) : (
               <>
                 <img
-                  src={videoPoster}
-                  alt="Júlia Alves Garcia gravando sua apresentação em vídeo"
-                  width={1920}
-                  height={1088}
+                  src={`https://img.youtube.com/vi/${videosApresentacao[idiomaVideo].id}/maxresdefault.jpg`}
+                  alt={videosApresentacao[idiomaVideo].titulo}
                   loading="lazy"
+                  onError={(e) => {
+                    (e.currentTarget as HTMLImageElement).src = videoPoster;
+                  }}
                   className="h-full w-full object-cover opacity-90 transition-transform duration-[1400ms] ease-[cubic-bezier(0.22,0.8,0.2,1)] group-hover:scale-105"
                 />
                 <div className="absolute inset-0 grid place-items-center">
                   <button
                     onClick={() => setTocandoVideo(true)}
                     className="play-pulse grid size-20 place-items-center rounded-full bg-accent/90 transition-transform duration-300 hover:scale-110"
-                    aria-label="Assistir apresentação em vídeo"
+                    aria-label={`Assistir apresentação (${idiomaVideo === "pt" ? "português" : "inglês"})`}
                   >
                     <span className="ml-1 block h-0 w-0 border-y-[11px] border-l-[18px] border-y-transparent border-l-paper" />
                   </button>
                 </div>
                 <div className="absolute bottom-4 left-4 text-paper sm:bottom-6 sm:left-6">
                   <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-paper/60">
-                    01 &nbsp;·&nbsp; Apresentação
+                    {idiomaVideo === "pt" ? "Português" : "English"}
                   </p>
                   <p className="mt-1 font-display text-lg font-medium italic sm:text-2xl">
-                    Conheça meu trabalho
+                    {videosApresentacao[idiomaVideo].titulo}
                   </p>
                 </div>
               </>
